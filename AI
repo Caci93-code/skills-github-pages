@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using AI for Admin Tasks</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #0056b3; }
+        .example, .exercise, .quiz { padding: 10px; border-left: 4px solid; margin: 10px 0; }
+        .example { background: #e8f0fe; border-color: #0056b3; }
+        .exercise { background: #fff3cd; border-color: #ffcc00; }
+        .quiz { background: #f8d7da; border-color: #dc3545; }
+        button { background: #0056b3; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; }
+        button:hover { background: #004494; }
+        #aiResponse, #quizResult { margin-top: 10px; padding: 10px; background: #d4edda; border-left: 4px solid #28a745; display: none; }
+        .page { display: none; }
+        .active { display: block; }
+    </style>
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function generateAIResponse() {
+            const responses = [
+                "Here’s a suggested email: 'Dear Team, I’d like to schedule a meeting for next Monday at 10 AM. Please confirm your availability. Thanks!'",
+                "AI Suggestion: 'Hello, can we meet next Monday at 10 AM? Let me know if that works. Regards.'",
+                "AI Draft: 'Hey everyone, I propose a meeting next Monday at 10 AM. Does that work for you all?'"
+            ];
+            
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            document.getElementById('aiResponse').innerText = randomResponse;
+            document.getElementById('aiResponse').style.display = 'block';
+        }
+
+        function checkQuizAnswer() {
+            const answer = document.getElementById('quizInput').value.toLowerCase();
+            const correctAnswers = ["documents", "admin tasks", "emails", "summarising text", "summarising"];
+            
+            if (correctAnswers.includes(answer)) {
+                document.getElementById('quizResult').innerText = "✅ Correct! AI can help with " + answer + "!";
+            } else {
+                document.getElementById('quizResult').innerText = "❌ Try again! Think about admin tasks AI can help with.";
+            }
+            document.getElementById('quizResult').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="page1" class="page active">
+            <h1>Using AI to Simplify Admin Tasks</h1>
+            <p>AI can help healthcare staff with administrative work by saving time and improving efficiency. Let's test your knowledge!</p>
+            
+            <h2>Quick Quiz</h2>
+            <div class="quiz">
+                <p><strong>Question:</strong> What is one way AI can help with admin tasks? (Hint: Think about typing, emails, or documents)</p>
+                <input type="text" id="quizInput" placeholder="Type your answer here...">
+                <button onclick="checkQuizAnswer()">Submit Answer</button>
+                <p id="quizResult"></p>
+            </div>
+            
+            <button onclick="showPage('page2')">Next</button>
+        </div>
+
+        <div id="page2" class="page">
+            <h2>How AI Can Help</h2>
+            <div class="example">
+                <p><strong>Speech-to-Text:</strong> Use AI to dictate notes instead of typing.</p>
+            </div>
+            <div class="example">
+                <p><strong>Email Drafting:</strong> AI can suggest and refine email responses.</p>
+            </div>
+            <div class="example">
+                <p><strong>Summarizing Notes:</strong> AI can shorten long reports into key points.</p>
+            </div>
+            
+            <button onclick="showPage('page1')">Back</button>
+            <button onclick="showPage('page3')">Next</button>
+        </div>
+
+        <div id="page3" class="page">
+            <h2>Try It Yourself!</h2>
+            <div class="exercise">
+                <p><strong>Task:</strong> Click the button below to see how AI might draft an email for you.</p>
+                <button onclick="generateAIResponse()">Generate AI Email</button>
+                <p id="aiResponse"></p>
+            </div>
+            
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>AI saves time by automating admin tasks.</li>
+                <li>Always review AI-generated content for accuracy.</li>
+                <li>Do not input patient data into public AI tools.</li>
+            </ul>
+            
+            <p><em>Explore AI and make admin tasks simpler!</em></p>
+            
+            <button onclick="showPage('page2')">Back</button>
+        </div>
+    </div>
+</body>
+</html>
